@@ -1967,6 +1967,22 @@ guide:
       });
     })();
   </script>
-  <script src="/assets/sovereign-upgrade.js" defer></script>
+  
+
+  <script src="/sovereign_tutorial.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+      if (window.createSovereignTutorial) {
+        window.createSovereignTutorial({
+          toolId: "zela-glasses-guide",
+          toolName: "Zela Glasses Guide",
+          tagline: "Comprehensive developer manual and hardware API guide for smart glasses!",
+          accentColor: "#06B6D4",
+          steps: [{"icon": "\ud83d\udc53", "title": "Wearable AI Development", "desc": "Everything you need to know to build camera, audio, and sensor apps for smart glasses (Ray-Ban Meta, Zela, etc.)."}, {"icon": "\u26a1", "title": "DAT SDK & Low-Latency Streaming", "desc": "Guides you step-by-step through setting up 1080p video streams and wearer-only voice gating."}, {"icon": "\ud83d\udee0\ufe0f", "title": "Code Snippets & Architecture", "desc": "Copy production-ready Python, Android, and WebRTC streaming templates."}]
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
