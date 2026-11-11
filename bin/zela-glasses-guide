@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Zela Glasses Guide CLI Binary
-Sovereign wearable AI mission coach for Ray-Ban Meta smart glasses over Tailscale.
+Wearable AI mission coach for Ray-Ban Meta smart glasses over Tailscale.
 """
 
 import argparse
@@ -17,9 +17,11 @@ TOOL_VERSION = "0.5.0"
 TOOL_CATEGORY = "Swarm & Core"
 TOOL_PORT = 8144
 STUDIO_PORT = 3000
-REPO_DIR = "/opt/zela-glasses-guide"
+_SCRIPT_REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO_DIR = _SCRIPT_REPO if os.path.exists(os.path.join(_SCRIPT_REPO, "server.py")) else "/opt/zela-glasses-guide"
 STUDIO_URL = f"http://127.0.0.1:{STUDIO_PORT}/tools/{TOOL_ID}"
 LOCAL_PORT_URL = f"http://127.0.0.1:{TOOL_PORT}"
+
 
 def check_daemon(url=f"{LOCAL_PORT_URL}/health", timeout=1.5):
     try:
@@ -31,10 +33,12 @@ def check_daemon(url=f"{LOCAL_PORT_URL}/health", timeout=1.5):
         pass
     return None
 
+
 def main():
+    default_ts = os.environ.get("ZELA_TAILSCALE_IP", "<tailscale-ip>")
     parser = argparse.ArgumentParser(
         prog=TOOL_ID,
-        description=f"{TOOL_NAME} (v{TOOL_VERSION}) — Sovereign wearable AI mission coach"
+        description=f"{TOOL_NAME} (v{TOOL_VERSION}) — Wearable AI mission coach"
     )
     parser.add_argument("--version", action="version", version=f"{TOOL_ID} v{TOOL_VERSION}")
     parser.add_argument("--status", action="store_true", help="Check local ZothOS installation & daemon status")
@@ -42,19 +46,19 @@ def main():
     parser.add_argument("--ui", action="store_true", help="Print local ZothOS workbench URL")
     parser.add_argument("--config", action="store_true", help="Print sample Zoth Relay mobile config YAML")
     parser.add_argument("--presets", action="store_true", help="List wearable AI mission coaching presets")
+    parser.add_argument("--tailscale-ip", default=default_ts, help="Tailscale mesh IP (or set ZELA_TAILSCALE_IP)")
     parser.add_argument("--serve", type=int, metavar="PORT", help="Start local standalone server on specified port")
 
     args = parser.parse_args()
 
     if args.serve:
         server_script = os.path.join(REPO_DIR, "server.py")
-        cmd = [sys.executable, server_script, "--port", str(args.serve)]
+        cmd = [sys.executable, server_script, "--port", str(args.serve), "--tailscale-ip", args.tailscale_ip]
         sys.exit(subprocess.run(cmd).returncode)
 
     daemon_health = check_daemon()
 
     if args.config:
-        cfg_path = os.path.join(REPO_DIR, "server.py")
         if daemon_health:
             try:
                 with urllib.request.urlopen(f"{LOCAL_PORT_URL}/api/config", timeout=2) as r:
@@ -63,7 +67,7 @@ def main():
                     return
             except Exception:
                 pass
-        print("# ~/.config/zoth-relay/mobile/config.yaml (zothos v0.5.0)\nhosts:\n  - 127.0.0.1\n  - 100.106.132.5\nport: 8766\n...")
+        print(f"# ~/.config/zoth-relay/mobile/config.yaml (zothos v0.5.0)\nhosts:\n  - 127.0.0.1\n  - {args.tailscale_ip}\nport: 8766\n...")
         return
 
     if args.presets:
@@ -93,12 +97,12 @@ def main():
         "studio_url": STUDIO_URL,
         "local_url": LOCAL_PORT_URL,
         "local_port": TOOL_PORT,
+        "tailscale_ip": args.tailscale_ip,
         "daemon_active": daemon_health is not None,
         "daemon_status": daemon_health or {"status": "inactive"},
         "license": "100% Free & Open Access (Zero Paywalls)",
         "support": {
-            "stripe_buy_coffee": "https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X",
-            "solana_wallet": "GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK"
+            "stripe_buy_coffee": "https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X"
         }
     }
 
@@ -116,7 +120,8 @@ def main():
     print(f"  Repository : {REPO_DIR}")
     print(f"  Daemon     : {daemon_tag} at {LOCAL_PORT_URL}")
     print(f"  Studio     : {STUDIO_URL}")
-    print(f"  Access     : 100% Free & Open Access (☕ https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X | ◎ GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK)")
+    print(f"  Access     : 100% Free & Open Access (https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)")
+
 
 if __name__ == "__main__":
     main()

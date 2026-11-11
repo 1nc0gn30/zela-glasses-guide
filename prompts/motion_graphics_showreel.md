@@ -8,7 +8,7 @@ The **Emerald & Gold Optical HUD Reticle (`#10B981` + `#D4AF37`)**: A precision 
 ## 1. 15-Second Showreel Prompt ("Resume Reel")
 
 ```text
-Act as a world-class motion graphics director and lead designer. Make a dynamic 15-second motion graphics video for Zela · Zoth Guide (Sovereign AI Mission Coach for Ray-Ban Meta Smart Glasses over Zoth Relay).
+Act as a senior motion graphics director and lead designer. Make a dynamic 15-second motion graphics video for Zela · Zoth Guide (Wearable AI Mission Coach for Ray-Ban Meta Smart Glasses over Zoth Relay).
 
 Hero Anchor: The #10B981 emerald and #D4AF37 gold optical HUD reticle from the smart glasses viewfinder leads every shot, snapping from real-world camera frames to WebSocket binary audio streams with zero visual dead space.
 
@@ -38,7 +38,7 @@ Narrative Arc:
    - Wearable cameras uploading private home and workspace video to third-party clouds, high latency, and stateless amnesia.
    - Text: "Why trust your eyes and ears to a third-party cloud?"
 2. The Paradigm Shift (0:06 - 0:12):
-   - Shutter snap. Ray-Ban Meta Glasses pair through the Zela Android bridge over Tailscale (100.106.132.5:8766) straight to your Linux workstation.
+   - Shutter snap. Ray-Ban Meta Glasses pair through the Zela Android bridge over Tailscale (<tailscale-ip>:8766) straight to your Linux workstation.
    - Text: "100% Sovereign. WireGuard Encrypted. Zero Disk Logging."
 3. The Three Pillars (0:12 - 0:22):
    - Pillar 1 (3s): Local Moondream vision captioning with deterministic repeat-penalty sanitization.

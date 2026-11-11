@@ -12,7 +12,8 @@ import sys
 from pathlib import Path
 
 DEFAULT_PORT = 8144
-DEFAULT_HOST = "127.0.0.1"
+DEFAULT_HOST = os.environ.get("ZELA_HOST", "127.0.0.1")
+DEFAULT_TAILSCALE_IP = os.environ.get("ZELA_TAILSCALE_IP", "<tailscale-ip>")
 BASE_DIR = Path(__file__).resolve().parent
 PUBLIC_DIR = BASE_DIR / "public"
 
@@ -25,10 +26,10 @@ SCENES = [
     {"id": "s6", "name": "Autonomous Navigation & Hazard Audio Cues", "category": "Mobility", "model": "moondream"}
 ]
 
-CONFIG_YAML = """# ~/.config/zoth-relay/mobile/config.yaml (zothos v0.5.0)
+CONFIG_YAML = f"""# ~/.config/zoth-relay/mobile/config.yaml (zothos v0.5.0)
 hosts:
   - 127.0.0.1
-  - 100.106.132.5
+  - {DEFAULT_TAILSCALE_IP}
 port: 8766
 agents_file: ~/.config/zoth-relay/mobile/agents.yaml
 audit_log: ~/.local/state/zoth-relay-mobile/audit.log
@@ -86,15 +87,14 @@ class ZelaGuideHandler(http.server.SimpleHTTPRequestHandler):
                 "version": "0.5.0",
                 "name": "Zela Glasses Guide",
                 "mode": "Sovereign Wearable AI Mission Coach",
-                "tailscale_ip": "100.106.132.5",
+                "tailscale_ip": os.environ.get("ZELA_TAILSCALE_IP", DEFAULT_TAILSCALE_IP),
                 "relay_port": 8766,
                 "vision_engine": "moondream (local via Ollama :11434)",
                 "tts_engine": "kokoro v1.0 ONNX (24kHz neural)",
                 "scenes_count": len(SCENES),
                 "pricing": "100% Free & Open-Access",
                 "support": {
-                    "stripe": "https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X",
-                    "solana": "GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK"
+                    "stripe": "https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X"
                 }
             })
             return
@@ -139,5 +139,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Zela Glasses Guide Workstation Server")
     parser.add_argument("--host", default=DEFAULT_HOST, help=f"Host to bind (default: {DEFAULT_HOST})")
     parser.add_argument("--port", type=int, default=DEFAULT_PORT, help=f"Port to bind (default: {DEFAULT_PORT})")
+    parser.add_argument("--tailscale-ip", default=DEFAULT_TAILSCALE_IP, help="Tailscale mesh IP advertised in relay config")
     args = parser.parse_args()
+    os.environ["ZELA_TAILSCALE_IP"] = args.tailscale_ip
     run_server(args.host, args.port)

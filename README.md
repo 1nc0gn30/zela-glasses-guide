@@ -1,136 +1,94 @@
 <div align="center">
-  <img src="assets/hero-banner.svg" alt="Zela Glasses Guide — Sovereign Architecture Banner" width="100%" />
+  <img src="assets/hero-banner.svg" alt="Zela Glasses Guide — Architecture Banner" width="100%" />
 </div>
 
 <br />
 
 <div align="center">
-  <a href="https://zoth.nullai.tech/tools/zela-glasses-guide"><img src="https://img.shields.io/badge/Zoth_Studio_v2-Workspace-D4AF37?style=for-the-badge&logo=sparkles&logoColor=black" alt="Zoth Studio Workspace" /></a>
-  <a href="http://127.0.0.1:8144"><img src="https://img.shields.io/badge/Workstation-Port_:8144-38BDF8?style=for-the-badge&logo=linux&logoColor=black" alt="Port :8144" /></a>
-  <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X"><img src="https://img.shields.io/badge/Support-Buy_Us_a_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Us a Coffee" /></a>
-  <a href="https://nullai.tech"><img src="https://img.shields.io/badge/Security-100%25_Zero--Egress-10B981?style=for-the-badge&logo=shield&logoColor=black" alt="Zero Egress" /></a>
+  <a href="https://zoth.nullai.tech/tools/zela-glasses-guide"><img src="https://img.shields.io/badge/Zoth_Studio_v2-Dossier-D4AF37?style=for-the-badge" alt="Zoth Studio v2 Dossier" /></a>
+  <a href="http://127.0.0.1:8144"><img src="https://img.shields.io/badge/Workstation-127.0.0.1:8144-38BDF8?style=for-the-badge" alt="Loopback Port 8144" /></a>
+  <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X"><img src="https://img.shields.io/badge/Support-Buy_Us_a_Coffee-FFDD00?style=for-the-badge" alt="Buy Us a Coffee" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge" alt="MIT License" /></a>
 </div>
 
-# ⚡ Zela Glasses Guide
+# Zela Glasses Guide
 
-> **Sovereign wearable AI mission coach for Ray-Ban Meta smart glasses over Tailscale — full-duplex WebSocket guide stream, Moondream vision, AGY coaching, and Kokoro TTS via zoth-relay-mobile.**
+Wearable AI mission coach workstation and configuration deck (`127.0.0.1:8144`) for Ray-Ban Meta Smart Glasses paired over Tailscale WireGuard to `zoth-relay-mobile` (`:8766`). Combines local `moondream` edge vision captioning via Ollama (`127.0.0.1:11434`), persistent `stream-json` coaching sessions with pre-warmed 14-turn rolling spares, and 24 kHz Kokoro v1.0 ONNX voice synthesis (`af_heart`) with barge-in cancellation.
 
----
-
-## 🏛️ Architectural Overview
-
-**Zela Glasses Guide** is an official sovereign tool in the **[Zoth Studio v2](https://zoth.nullai.tech)** (77-Tool Matrix) and **[ZothOS Linux 3.3](https://zothos.nullai.tech)** ecosystem, engineered by **1nc0gn30 • NullAI ([@1nc0gn30](https://github.com/1nc0gn30))**.
+## Overview
 
 | Property | Specification |
 | :--- | :--- |
 | **Tool ID** | `zela-glasses-guide` |
 | **Category** | `Swarm & Core` |
-| **Workstation Port** | `http://127.0.0.1:8144` |
-| **Relay Port** | `http://127.0.0.1:8766` (`zoth-relay-mobile`) |
-| **Execution Mode** | `browser` / `local_cli` |
-| **Zoth Studio Route** | [`http://127.0.0.1:3000/tools/zela-glasses-guide`](http://127.0.0.1:3000/tools/zela-glasses-guide) |
-| **Licensing** | **100% Free & Open-Access** (Zero Paywalls) |
+| **Loopback Workstation** | `http://127.0.0.1:8144` (`python3 server.py --host 127.0.0.1 --port 8144`) |
+| **Mobile Relay Endpoint** | `ws://127.0.0.1:8766/v1/guide/stream` or `ws://<tailscale-ip>:8766/v1/guide/stream` |
+| **Zoth Studio v2 Dossier** | [`https://zoth.nullai.tech/tools/zela-glasses-guide`](https://zoth.nullai.tech/tools/zela-glasses-guide) (`http://127.0.0.1:3000/tools/zela-glasses-guide`) |
+| **ZothOS v3.4.0 CLI** | `zela-glasses-guide` (`bin/zela-glasses-guide`) and `zela-glasses-guide-tui` |
+| **License** | MIT — 100% Free & Open-Source |
 
----
+## Architecture
 
-## 💎 Key Capabilities
+1. **Interactive HUD Simulator & Config Deck (`public/index.html`, `public/possibilities.html`, `server.py`)**
+   - Serves an interactive smart-glasses optical HUD simulator covering 6 domain mission presets (`Repair`, `Hardware`, `Daily`, `Security`, `DevOps`, `Mobility`), WebSocket relay tester, and exportable `zoth-relay-mobile` YAML configuration bundle.
+2. **Full-Duplex Relay Pipeline (`zoth-relay-mobile` `:8766`)**
+   - **Vision Stage**: Scene-changed smart-glasses frames arrive over encrypted Tailscale WireGuard (`<tailscale-ip>:8766/v1/guide/stream`) and are captioned locally in RAM via Ollama `moondream` (`keep_alive: 10m`, thermal ceiling `hot_c: 88`).
+   - **Coaching Stage**: Persistent `agy` `stream-json` loop (`roll_turns: 14`, `roll_chars: 6000`) swaps seamlessly to a pre-warmed spare session to avoid context latency spikes.
+   - **Voice Stage**: Streaming speech markers feed local Kokoro v1.0 ONNX (`kokoro-v1.0.onnx`, `af_heart`, 24 kHz PCM16LE, `chunk_ms: 200`) with immediate barge-in cancellation.
 
-- **Full-Duplex Encrypted Stream**: Connect Ray-Ban Meta Smart Glasses to your Linux workstation over Tailscale WireGuard (`100.106.132.5:8766/v1/guide/stream`).
-- **Local Moondream Vision**: 1.34s ask-to-say latency with edge frame captioning via local Ollama (`moondream`).
-- **Persistent AGY Session Rolling**: Pre-warmed spare AGY session rolling with low-effort sub-second prompt caching.
-- **24kHz Kokoro ONNX Neural TTS**: Studio-quality voice synthesis (`af_heart`) running 100% in local volatile RAM.
-- **Zero-Egress RAM-Only Privacy**: Camera frames, speech recognition transcripts, and spoken audio are held strictly in RAM for the active turn and never written to disk.
-- **100% Unlocked**: Zero blur locks, zero license modals, zero paywalls.
-
----
-
-## 💻 ZothOS CLI Binary Usage
+## Quickstart
 
 ```bash
-# Check workstation & daemon status
-zela-glasses-guide --status
+git clone https://github.com/1nc0gn30/zela-glasses-guide.git
+cd zela-glasses-guide
 
-# Telemetry JSON output
-zela --json
-
-# View wearable mission coaching presets
-zela-guide --presets
-
-# Print tuned Zoth Relay mobile config YAML
-zela-guide --config
-
-# Start local server on custom port
-zela-glasses-guide --serve 8144
+# Launch the loopback workstation on 127.0.0.1:8144
+python3 server.py --host 127.0.0.1 --port 8144 --tailscale-ip <tailscale-ip>
 ```
 
----
+### Environment Variables
 
-## ☕ Support 1nc0gn30 • NullAI & NullAI Platform
-
-This tool is 100% free, open, and unlocked by default. If it empowers your sovereign AI workflow, consider supporting ongoing development:
-
-- **Stripe "Buy Us a Coffee"**: [https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
-- **Solana Tip Address**: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`
-
----
-
-<div align="center">
-  <sub>Engineered by <b>1nc0gn30 • NullAI</b> (<a href="https://github.com/1nc0gn30">@1nc0gn30</a>) &bull; <a href="https://nullai.tech">NullAI Platform</a> &bull; <a href="https://zoth.nullai.tech">Zoth Studio v2</a></sub>
-</div>
-
----
-
-## 🏛️ ZothOS v3.4, Zoth Studio v2 & Obsidian Second Brain Ecosystem
-
-```mermaid
-flowchart LR
-    subgraph ZothOS["🐧 ZothOS v3.4 CLI & Braille TUI"]
-        CLI["zela-glasses-guide --help / --json"]
-        TUI["zela-glasses-guide-tui<br/>Unicode U+2800 2x4 Braille"]
-    end
-
-    subgraph Workstation["⚡ Sovereign Workstation"]
-        WEB["http://127.0.0.1:8144<br/>REST API & /health"]
-    end
-
-    subgraph Studio["🌌 Zoth Studio v2 & ZothOS-Lite"]
-        GODMODE["http://127.0.0.1:3000/tools/zela-glasses-guide<br/>God-Mode Workstation"]
-        LITE["http://127.0.0.1:8145<br/>ZothOS-Lite Web Desktop"]
-    end
-
-    subgraph SecondBrain["💎 Obsidian Second Brain & STDP"]
-        TRACKER["http://127.0.0.1:8151<br/>Zoth Obsidian Tracker"]
-        NEURO["http://127.0.0.1:8094<br/>Neuro-Memory STDP Cortex"]
-        NOTE["Studio/Tools/Studio zela-glasses-guide.md"]
-    end
-
-    CLI --> WEB
-    TUI --> WEB
-    WEB <--> GODMODE
-    WEB <--> LITE
-    WEB --> TRACKER
-    TRACKER <--> NOTE
-    NOTE <--> NEURO
-```
-
-### Cross-Surface Integration Matrix
-
-| Surface | Endpoint / Binary | Capabilities |
+| Variable | Default | Purpose |
 | :--- | :--- | :--- |
-| **Standalone Workstation** | `http://127.0.0.1:8144` | 100% Free & Open-Access Web Deck, live `/health` & REST telemetry |
-| **Zoth Studio v2 Route** | `http://127.0.0.1:3000/tools/zela-glasses-guide` | Interactive God-Mode component inside Zoth Studio (`https://zoth.nullai.tech`) |
-| **ZothOS v3.4 CLI & TUI** | `zela-glasses-guide` / `zela-glasses-guide-tui` | Global binary in `/usr/local/bin/` with Unicode `U+2800` Braille TUI & `--json` output |
-| **ZothOS-Lite Web Desktop** | `http://127.0.0.1:8145` | Browser-native KDE-style window manager & terminal launcher |
-| **Zoth Obsidian Tracker** | `http://127.0.0.1:8151` | Interactive Obsidian Second Brain vault explorer (`~/Documents/Obsidian Vault/Studio/Tools/Studio zela-glasses-guide.md`) |
-| **Neuro-Memory STDP Cortex** | `http://127.0.0.1:8094` | 3-Factor STDP synaptic memory daemon & 21-tool MCP server |
+| `ZELA_HOST` | `127.0.0.1` | Default bind host for `server.py` |
+| `ZELA_TAILSCALE_IP` | `<tailscale-ip>` | Tailscale mesh IP populated into `/api/status` and `/api/config` YAML |
+
+## CLI & MCP Usage
+
+### ZothOS v3.4.0 CLI (`bin/zela-glasses-guide`)
 
 ```bash
-# Inspect CLI & Unicode U+2800 Braille TUI on ZothOS v3.4
-zela-glasses-guide --help
-zela-glasses-guide-tui --status
-zela-glasses-guide-tui --json
-
-# Verify Second Brain Vault & 12-Step Verification Gallery on :8151
-zoth-obsidian-tracker --verify
+./bin/zela-glasses-guide --help
+./bin/zela-glasses-guide --status
+./bin/zela-glasses-guide --json
+./bin/zela-glasses-guide --presets --json
+./bin/zela-glasses-guide --config --tailscale-ip <tailscale-ip>
+./bin/zela-glasses-guide --ui
+./bin/zela-glasses-guide --serve 8144 --tailscale-ip <tailscale-ip>
 ```
 
+### REST API Endpoints (`127.0.0.1:8144`)
+
+- `GET /health`, `GET /api/health` — Daemon health, engine label, version, port, and open-access status.
+- `GET /api/status` — Relay port (`8766`), configured `tailscale_ip`, vision/TTS engine specs, and preset count.
+- `GET /api/presets` — 6 wearable mission presets (`s1`–`s6`) with category and local vision model metadata.
+- `GET /api/config` — Sample `~/.config/zoth-relay/mobile/config.yaml` payload.
+
+## Testing & Verification
+
+```bash
+# Run HTTP endpoint and relay YAML invariant tests
+python3 -m pytest -q
+
+# Verify CLI flags and deterministic JSON output
+./bin/zela-glasses-guide --help
+./bin/zela-glasses-guide --json
+```
+
+## Support
+
+Zela Glasses Guide is 100% free and open-source with zero paywalls. Optional support: [Buy Us a Coffee via Stripe](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X).
+
+## License
+
+Released under the [MIT License](LICENSE). Engineered by [1nc0gn30](https://1nc0gn30.si) (`@1nc0gn30`) and [NullAI](https://nullai.tech).
