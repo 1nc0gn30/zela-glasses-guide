@@ -87,8 +87,10 @@ python3 -m pytest -q
 
 ## Support
 
-Zela Glasses Guide is 100% free and open-source with zero paywalls. Optional support: [Buy Us a Coffee via Stripe](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X).
+Zela Glasses Guide is 100% free and open-source with zero paywalls:
+- **☕ Buy Us a Coffee (Stripe)**: [https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
+- **◎ Solana Tip Address**: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`
 
 ## License
 
-Released under the [MIT License](LICENSE). Engineered by [1nc0gn30](https://1nc0gn30.si) (`@1nc0gn30`) and [NullAI](https://nullai.tech).
+Engineered by **Neal Frazier Tech (@1nc0gn30) • NullAI Platform** ([GitHub](https://github.com/1nc0gn30/zela-glasses-guide) · [https://nullai.tech](https://nullai.tech)). Released under the [MIT License](LICENSE).

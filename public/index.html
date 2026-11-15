@@ -33,7 +33,7 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "SoftwareApplication",
+        "@type": ["WebApplication", "SoftwareApplication"],
         "name": "Zela · Zoth Guide (Zoth Relay Mobile v0.5.0)",
         "url": "https://zela-glasses-guide.netlify.app/",
         "applicationCategory": "DeveloperApplication",
@@ -48,10 +48,10 @@
         },
         "creator": {
           "@type": "Organization",
-          "name": "1nc0gn30 • NullAI",
+          "name": "Neal Frazier Tech (@1nc0gn30) • NullAI Platform",
           "url": "https://nullai.tech",
           "sameAs": [
-            "https://github.com/1nc0gn30"
+            "https://github.com/1nc0gn30/zela-glasses-guide"
           ]
         }
       },
@@ -76,10 +76,10 @@
           },
           {
             "@type": "Question",
-            "name": "How does Zoth Guide v0.5.0 eliminate streaming latency over long sessions?",
+            "name": "How does Zoth Guide v0.5.0 eliminate streaming latency and is it free?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Zoth Guide v0.5.0 pre-warms a background spare AGY stream-json session and rolls over automatically every 14 turns or 6,000 characters while splitting spoken markers ([^ ... ^]) at the first comma to stream 24kHz Kokoro ONNX audio in 1.34s to 2.15s."
+              "text": "Zoth Guide v0.5.0 pre-warms a background spare AGY stream-json session and streams 24kHz Kokoro ONNX audio in 1.34s to 2.15s. It is 100% free and open-access with zero paywalls; optional support is available via Buy Us a Coffee (https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X) or Solana tip (GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK)."
             }
           }
         ]
@@ -880,8 +880,9 @@
 <body>
 
 <div id="zoth-coffee-support-bar" style="background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(212,175,55,0.14)); border-bottom: 1px solid rgba(212,175,55,0.35); padding: 8px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; z-index: 9999;">
-  <span style="color: #10B981; font-weight: 800;">✦ 100% FREE &amp; OPEN ACCESS · ZERO PAYWALLS</span>
+  <span style="background: #065F46; color: #FFFFFF; padding: 4px 10px; border-radius: 6px; font-weight: 800;">✦ 100% FREE &amp; OPEN ACCESS · ZERO PAYWALLS</span>
   <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener noreferrer" style="background: #D4AF37; color: #08080B; padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">☕ Buy Us a Coffee (Stripe)</a>
+  <a href="solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK" onclick="if(navigator.clipboard){navigator.clipboard.writeText('GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK');this.textContent='✓ Copied GG2eQb...dXoK!';}" style="background: #047857; color: #FFFFFF; border: 1px solid #059669; padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">◎ Solana Tip (GG2e...dXoK)</a>
 </div>
 
 
@@ -1378,12 +1379,12 @@ guide:
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        Engineered by <strong>1nc0gn30 (@1nc0gn30) • NullAI Platform</strong>
+        Engineered by <strong>Neal Frazier Tech (@1nc0gn30) • NullAI Platform</strong>
       </div>
       <div class="footer-links">
+        <a href="https://github.com/1nc0gn30/zela-glasses-guide" target="_blank" rel="noopener noreferrer">GitHub: zela-glasses-guide</a>
         <a href="https://github.com/1nc0gn30/zoth-relay" target="_blank" rel="noopener noreferrer">GitHub: zoth-relay</a>
         <a href="https://zoth.nullai.tech" target="_blank" rel="noopener noreferrer">Zoth Studio</a>
-        <a href="https://zothos.nullai.tech" target="_blank" rel="noopener noreferrer">ZothOS</a>
         <a href="https://nullai.tech" target="_blank" rel="noopener noreferrer">NullAI Platform</a>
       </div>
     </div>
